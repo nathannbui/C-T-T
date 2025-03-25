@@ -1,5 +1,5 @@
 # Course Task Tracker
-DECEMBER 2022
+Made in DECEMBER 2022
 
 A web-based task management application designed specifically for tracking course-related tasks. Built with vanilla JavaScript, HTML, and CSS, this application provides a clean and intuitive interface for managing your course tasks efficiently.
 
@@ -16,7 +16,7 @@ A web-based task management application designed specifically for tracking cours
 
 ## Technical Implementation
 
-- **Vanilla JavaScript** with modern ES6+ features
+- **Vanilla JavaScript** with ES6+ features
 - DOM manipulation for dynamic content updates
 - Local Storage API for data persistence
 - Object-Oriented Programming with ES6 Classes
@@ -54,13 +54,6 @@ A web-based task management application designed specifically for tracking cours
 5. **Marking Tasks as Complete**
    - Click the checkbox next to any task to mark it as complete/incomplete
 
-## Browser Support
-
-This application works in all modern browsers that support ES6+ features:
-- Chrome
-- Firefox
-- Safari
-- Edge
 
 ## License
 
