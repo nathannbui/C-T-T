@@ -9,7 +9,6 @@ class TaskManager {
         this.statusFilter = document.getElementById('statusFilter');
         this.attachments = new Map(); // Store file attachments in memory
         
-        // Initialize statistics elements
         this.totalTasksElement = document.getElementById('totalTasks');
         this.completedTasksElement = document.getElementById('completedTasks');
         this.pendingTasksElement = document.getElementById('pendingTasks');
@@ -21,7 +20,7 @@ class TaskManager {
     }
 
     init() {
-        // Event Listeners
+
         this.taskForm.addEventListener('submit', (e) => this.handleSubmit(e));
         this.courseFilter.addEventListener('input', () => this.renderTasks());
         this.priorityFilter.addEventListener('change', () => this.renderTasks());
@@ -46,15 +45,14 @@ class TaskManager {
             }
         }
         
-        // Initial render
         this.renderTasks();
     }
 
     updateCourseList() {
-        // Get unique course names from tasks
+        // Get course names from tasks
         const courses = [...new Set(this.tasks.map(task => task.course))];
         
-        // Update datalist
+        // update lists
         const courseList = document.getElementById('courseList');
         courseList.innerHTML = courses
             .map(course => `<option value="${course}">`)
@@ -73,13 +71,13 @@ class TaskManager {
         const taskAttachment = document.getElementById('taskAttachment').files[0];
         
         if (this.taskForm.dataset.editing) {
-            // Edit existing task
+            // edit existing task
             const taskId = parseInt(this.taskForm.dataset.editing);
             this.editTask(taskId, taskTitle, taskCourse, taskDueDate, taskTime, taskDescription, taskPriority, taskAttachment);
             delete this.taskForm.dataset.editing;
             document.querySelector('.btn-submit').textContent = 'Add Task';
         } else {
-            // Add new task
+            // adds new task
             this.addTask(taskTitle, taskCourse, taskDueDate, taskTime, taskDescription, taskPriority, taskAttachment);
         }
         
@@ -118,7 +116,7 @@ class TaskManager {
         
         this.tasks.push(task);
         this.saveTasks();
-        this.updateStatistics(); // Update statistics when adding a task
+        this.updateStatistics();
     }
 
     editTask(taskId, title, course, dueDate, time, description, priority, attachment) {
@@ -150,7 +148,7 @@ class TaskManager {
         this.tasks = this.tasks.filter(task => task.id !== taskId);
         this.saveTasks();
         this.renderTasks();
-        this.updateStatistics(); // Update statistics when deleting a task
+        this.updateStatistics(); 
         this.updateCharts();
     }
 
@@ -164,7 +162,7 @@ class TaskManager {
         
         this.saveTasks();
         this.renderTasks();
-        this.updateStatistics(); // Update statistics when toggling task completion
+        this.updateStatistics();
         this.updateCharts();
     }
 
@@ -198,7 +196,6 @@ class TaskManager {
             this.pendingTasksElement.textContent = pending;
         }
 
-        // Log statistics for debugging
         console.log('Statistics Updated:', { total, completed, pending });
     }
 
@@ -250,7 +247,6 @@ class TaskManager {
         
         let filteredTasks = this.tasks;
         
-        // Apply filters
         if (courseFilterValue) {
             filteredTasks = filteredTasks.filter(task => 
                 task.course.toLowerCase().includes(courseFilterValue)
@@ -267,7 +263,6 @@ class TaskManager {
             );
         }
         
-        // Sort tasks by due date and priority
         filteredTasks.sort((a, b) => {
             const dateComparison = new Date(a.dueDate) - new Date(b.dueDate);
             if (dateComparison === 0) {
@@ -279,7 +274,6 @@ class TaskManager {
         
         this.tasksList.innerHTML = filteredTasks.map(task => this.createTaskElement(task)).join('');
         
-        // Add event listeners to the newly created elements
         this.addTaskEventListeners();
     }
 
@@ -318,7 +312,7 @@ class TaskManager {
     }
 
     addTaskEventListeners() {
-        // Add event listeners for edit buttons
+        // edit buttons
         document.querySelectorAll('.btn-edit').forEach(button => {
             button.addEventListener('click', (e) => {
                 const taskId = parseInt(e.target.closest('.task-item').dataset.id);
@@ -326,7 +320,7 @@ class TaskManager {
             });
         });
 
-        // Add event listeners for delete buttons
+        // delete buttons
         document.querySelectorAll('.btn-delete').forEach(button => {
             button.addEventListener('click', (e) => {
                 const taskId = parseInt(e.target.closest('.task-item').dataset.id);
@@ -336,7 +330,7 @@ class TaskManager {
             });
         });
 
-        // Add event listeners for checkboxes
+        // llisteners for checkboxes
         document.querySelectorAll('.task-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 const taskId = parseInt(e.target.closest('.task-item').dataset.id);
@@ -355,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new TaskManager();
 });
 
-// Global function for downloading attachments
+// Global0function for downloading the attached files etc..
 window.downloadAttachment = function(fileName) {
     const attachment = taskManager.attachments.get(fileName);
     if (attachment) {
