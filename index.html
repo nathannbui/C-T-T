@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Task Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Course Task Tracker</h1>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span id="totalTasks">0</span>
+                    <label>Total Tasks</label>
+                </div>
+                <div class="stat-item">
+                    <span id="completedTasks">0</span>
+                    <label>Completed</label>
+                </div>
+                <div class="stat-item">
+                    <span id="pendingTasks">0</span>
+                    <label>Pending</label>
+                </div>
+            </div>
+        </header>
+        
+        <div class="task-form">
+            <form id="taskForm">
+                <div class="form-group">
+                    <input type="text" id="taskTitle" placeholder="Task Title" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="taskCourse" placeholder="Enter Course Name" required list="courseList">
+                        <datalist id="courseList">
+                            <!-- This will be populated dynamically with previously used courses -->
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <select id="taskPriority" required>
+                            <option value="">Select Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="date" id="taskDueDate" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="time" id="taskTime" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea id="taskDescription" placeholder="Task Description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="taskAttachment" accept=".pdf,.doc,.docx,.txt">
+                </div>
+                <button type="submit" class="btn-submit">Add Task</button>
+            </form>
+        </div>
+
+        <div class="tasks-container">
+            <div class="tasks-header">
+                <h2>Tasks</h2>
+                <div class="filter-container">
+                    <input type="text" id="courseFilter" placeholder="Filter by Course" class="filter-input">
+                    <select id="priorityFilter">
+                        <option value="all">All Priorities</option>
+                        <option value="high">High Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="low">Low Priority</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+            <div id="tasksList"></div>
+        </div>
+
+        <!-- Calendar View Modal -->
+        <div id="calendarModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="calendar"></div>
+            </div>
+        </div>
+
+        <!-- Task Statistics -->
+        <div class="statistics-container">
+            <canvas id="taskStats"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
